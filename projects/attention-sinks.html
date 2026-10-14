@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rethinking Attention Sinks — Pham Ha Khanh Chi</title>
+  <meta name="description" content="Individual research on attention sinks in Qwen3-1.7B: query-side attribution, layer-wise dynamics, and regime-dependent function.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="project.css">
+  <script>
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="project-page research-page" style="--f: var(--f-academics)">
+  <header class="project-bar">
+    <a class="back-link" href="../index.html#projects"><span aria-hidden="true">←</span> Projects</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+  </header>
+
+  <main class="app-page">
+    <!-- Paper header -->
+    <section class="paper-head">
+      <p class="mono paper-kicker">(02) Individual research · Interpretability</p>
+      <h1>Rethinking Attention Sinks</h1>
+      <p class="paper-sub">Query-Side Attribution, Layer-Wise Dynamics, and Regime-Dependent Function</p>
+      <p class="app-dev">Pham Ha Khanh Chi</p>
+      <p class="mono paper-meta">2026 · Mentored by Steve Hong</p>
+      <div class="app-actions">
+        <a class="pill pill-solid" href="https://github.com/hkchi-pham/attention-sink-research" target="_blank" rel="noopener">Code on GitHub ↗</a>
+      </div>
+    </section>
+
+    <!-- Info strip -->
+    <ul class="info-strip" aria-label="Project details">
+      <li><span>Model</span><strong>Qwen3</strong><em>1.7B parameters</em></li>
+      <li><span>Attention</span><strong>GQA</strong><em>shared keys/values</em></li>
+      <li><span>Angles</span><strong>3</strong><em>cause · depth · function</em></li>
+      <li><span>Ran on</span><strong>Laptop</strong><em>my own computer</em></li>
+      <li><span>Year</span><strong>2026</strong><em>Mentor: Steve Hong</em></li>
+    </ul>
+
+    <!-- Abstract-style summary -->
+    <section class="app-section">
+      <h2>In short</h2>
+      <p class="paper-lead">
+        Some attention heads pour most of their attention onto the very first token, an “attention sink”.
+        I asked <em>why particular heads</em> become sinks, using Qwen3’s grouped-query attention as a natural
+        experiment, and found that the query pathway is a causal contributor to which heads sink.
+      </p>
+    </section>
+
+    <!-- Motivation -->
+    <section class="app-section">
+      <h2>Motivation</h2>
+      <div class="app-desc">
+        <p>This project grew out of my own reading on how transformers work. I started with attention, the part
+          that felt most unfamiliar: the mechanism where each token decides which previous tokens are worth
+          “paying attention to”, using <strong>queries</strong> (what the token is looking for), <strong>keys</strong>
+          (what earlier tokens offer) and <strong>values</strong> (the information they pass on).</p>
+        <p>Reading <a href="https://transformer-circuits.pub/2021/framework/index.html" target="_blank" rel="noopener">A Mathematical Framework for Transformer Circuits</a>
+          was enlightening: attention is the only component that moves information between positions, and it
+          decomposes into a QK circuit that decides where to attend and an OV circuit that decides what to write.
+          Later, I read <a href="https://arxiv.org/abs/2309.17453" target="_blank" rel="noopener">Efficient Streaming Language Models with Attention Sinks</a>,
+          and wanted to stop reading about the phenomenon and see it for myself. I chose Qwen3-1.7B, a model small
+          enough to run on my own computer, but large enough to show real attention sinks.</p>
+      </div>
+      <figure class="figure">
+        <svg class="attn" viewBox="0 0 214 214" role="img" aria-label="Schematic attention pattern: every token puts most of its attention on the first token, the sink"><rect class="sink" x="0" y="0" width="16" height="16" rx="3" fill-opacity="0.95"/><rect class="sink" x="0" y="18" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="18" width="16" height="16" rx="3" fill-opacity="0.22"/><rect class="sink" x="0" y="36" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="36" width="16" height="16" rx="3" fill-opacity="0.07"/><rect x="36" y="36" width="16" height="16" rx="3" fill-opacity="0.26"/><rect class="sink" x="0" y="54" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="54" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="36" y="54" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="54" y="54" width="16" height="16" rx="3" fill-opacity="0.22"/><rect class="sink" x="0" y="72" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="72" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="36" y="72" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="54" y="72" width="16" height="16" rx="3" fill-opacity="0.05"/><rect x="72" y="72" width="16" height="16" rx="3" fill-opacity="0.23"/><rect class="sink" x="0" y="90" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="90" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="36" y="90" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="54" y="90" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="72" y="90" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="90" y="90" width="16" height="16" rx="3" fill-opacity="0.19"/><rect class="sink" x="0" y="108" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="108" width="16" height="16" rx="3" fill-opacity="0.07"/><rect x="36" y="108" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="54" y="108" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="72" y="108" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="90" y="108" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="108" y="108" width="16" height="16" rx="3" fill-opacity="0.30"/><rect class="sink" x="0" y="126" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="126" width="16" height="16" rx="3" fill-opacity="0.05"/><rect x="36" y="126" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="54" y="126" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="72" y="126" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="90" y="126" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="108" y="126" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="126" y="126" width="16" height="16" rx="3" fill-opacity="0.28"/><rect class="sink" x="0" y="144" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="144" width="16" height="16" rx="3" fill-opacity="0.07"/><rect x="36" y="144" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="54" y="144" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="72" y="144" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="90" y="144" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="108" y="144" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="126" y="144" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="144" y="144" width="16" height="16" rx="3" fill-opacity="0.20"/><rect class="sink" x="0" y="162" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="162" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="36" y="162" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="54" y="162" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="72" y="162" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="90" y="162" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="108" y="162" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="126" y="162" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="144" y="162" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="162" y="162" width="16" height="16" rx="3" fill-opacity="0.21"/><rect class="sink" x="0" y="180" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="180" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="36" y="180" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="54" y="180" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="72" y="180" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="90" y="180" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="108" y="180" width="16" height="16" rx="3" fill-opacity="0.15"/><rect x="126" y="180" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="144" y="180" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="162" y="180" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="180" y="180" width="16" height="16" rx="3" fill-opacity="0.20"/><rect class="sink" x="0" y="198" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="198" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="36" y="198" width="16" height="16" rx="3" fill-opacity="0.05"/><rect x="54" y="198" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="72" y="198" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="90" y="198" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="108" y="198" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="126" y="198" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="144" y="198" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="162" y="198" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="180" y="198" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="198" y="198" width="16" height="16" rx="3" fill-opacity="0.23"/></svg>
+        <figcaption>
+          <span class="mono">Schematic</span>
+          What a sink looks like. Each row is a token and each square is how much it attends to an earlier token.
+          Almost every token sends most of its attention to the first one.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Gap -->
+    <section class="app-section">
+      <h2>The gap I noticed</h2>
+      <div class="app-desc">
+        <p>Once I could load the model and plot its attention, I realised the interesting question was not
+          <em>that</em> a sink exists but <em>why particular heads</em> become sinks. Several mechanisms have been
+          proposed (key-side biases, softmax-normalisation effects, architecture-specific circuits), but how
+          head-specific sink specialisation arises in models with shared key/value representations is less understood.</p>
+        <p>Qwen3’s grouped-query attention turned out to be a natural experiment for exactly this. Within a group,
+          several query heads share the same keys and values, so if two such heads sink differently, the difference
+          has to come from their queries. That controlled structure let me ask a clear, sharp question I could
+          answer, instead of a more abstract question about attention in general.</p>
+      </div>
+      <figure class="figure figure-wide">
+        <svg class="gqa" viewBox="0 0 520 220" role="img" aria-label="Diagram: four query heads in one group all read the same shared keys and values; one of them is a sink head and one is not.">
+          <g class="gqa-lines" fill="none" stroke-width="1.5">
+            <path d="M70 72 C70 120 260 110 260 150"/>
+            <path d="M190 72 C190 120 260 110 260 150"/>
+            <path d="M330 72 C330 120 260 110 260 150"/>
+            <path d="M450 72 C450 120 260 110 260 150"/>
+          </g>
+          <g class="gqa-q">
+            <rect x="20" y="22" width="100" height="50" rx="10"/>
+            <rect class="is-sink" x="140" y="22" width="100" height="50" rx="10"/>
+            <rect x="280" y="22" width="100" height="50" rx="10"/>
+            <rect x="400" y="22" width="100" height="50" rx="10"/>
+          </g>
+          <g class="gqa-text" text-anchor="middle">
+            <text x="70" y="52">Query 1</text>
+            <text x="190" y="52">Query 2</text>
+            <text x="330" y="52">Query 3</text>
+            <text x="450" y="52">Query 4</text>
+            <text class="gqa-tag" x="190" y="12">sink head</text>
+            <text class="gqa-tag" x="330" y="12">not a sink</text>
+          </g>
+          <rect class="gqa-kv" x="170" y="150" width="180" height="54" rx="12"/>
+          <text class="gqa-text" x="260" y="182" text-anchor="middle">Shared keys + values</text>
+        </svg>
+        <figcaption>
+          <span class="mono">Why GQA helps</span>
+          Heads in one group read exactly the same keys and values, so any difference in sinking must come from the queries.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Method -->
+    <section class="app-section">
+      <h2>How I investigated it</h2>
+      <p class="app-desc">I approached the sink from three angles.</p>
+      <div class="steps">
+        <article>
+          <p class="mono">(01) Cause</p>
+          <h3>Query transplants</h3>
+          <p>I exploited the shared key/value structure of GQA to isolate the query pathway, and tested whether fully
+            or partially transplanting one head’s query transfers its sink behaviour to another.</p>
+        </article>
+        <article>
+          <p class="mono">(02) Depth</p>
+          <h3>Layer-by-layer trajectories</h3>
+          <p>I treated each head’s sink not as a fixed score but as a trajectory across depth, tracking how attention
+            concentration, redistribution and predictability evolve layer by layer, with matched control heads throughout.</p>
+        </article>
+        <article>
+          <p class="mono">(03) Function</p>
+          <h3>Full vs windowed attention</h3>
+          <p>I perturbed sink attention under both full-context and windowed (streaming) attention, to separate whether
+            the sink is used locally from whether it is structurally necessary at long range.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Findings -->
+    <section class="app-section">
+      <h2>What I found</h2>
+      <ol class="findings">
+        <li><span class="mono">01</span><div><p><strong>The query pathway matters.</strong> Query-side interventions transfer sink
+          behaviour within a GQA group, identifying the query pathway as a causal contributor to within-group sink specialisation.</p>
+          <figure class="plot">
+            <a href="../assets/research/partial-transplant.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/partial-transplant.webp" alt="Three panels plotting transfer fraction, BOS logit and sink score against alpha, the share of the donor query blended into the recipient head. Sink score rises from about 0.23 at alpha 0 to about 0.32 at alpha 1." width="2400" height="750" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Partial transplant</span> Blending a sink head’s query into another head step by step (α from 0 to 1). The recipient’s sink score (c) climbs from about 0.23 to about 0.32 as more of the donor query is mixed in.</figcaption>
+          </figure>
+        </div></li>
+        <li><span class="mono">02</span><div><p><strong>Sinks form early, then settle.</strong> Across depth, the sink emerges early and
+          strengthens gradually, after which sink heads redistribute their attention comparatively little and their trajectories decelerate.</p>
+          <figure class="plot">
+            <a href="../assets/research/concentration.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/concentration.webp" alt="Six panels of attention concentration across layers for sink cells (red) and control cells (blue): effective number of attended tokens, normalised entropy and sink mass, with their layer-to-layer changes below. Sink mass for sink cells starts near 0.67 and rises to about 0.8 to 0.9." width="1566" height="938" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Concentration across depth</span> Sink cells (red) already put about two-thirds of their attention on the first token by layer 3, rising to around 0.8–0.9 in later layers (top right). Matched control cells (blue) stay well below until around layer 20.</figcaption>
+          </figure>
+          <figure class="plot plot-narrow">
+            <a href="../assets/research/redistribution.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/redistribution.webp" alt="Line chart of layer-to-layer change in attention pattern, measured as Jensen-Shannon divergence, for sink cells (red) and control cells (blue). Sink cells are mostly lower and fall to about 0.05 to 0.13 in the last layers." width="940" height="634" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Redistribution between layers</span> How much the attention pattern changes from one layer to the next (Jensen–Shannon divergence). Sink cells (red) mostly shift less than control cells (blue), and settle to around 0.05–0.13 in the last layers.</figcaption>
+          </figure>
+        </div></li>
+        <li><span class="mono">03</span><div><p><strong>Whether it matters depends on the regime.</strong> Removing sink attention barely
+          affects full-context next-token prediction, yet under windowed attention, retaining just one sink token is enough to restore performance.</p>
+          <figure class="plot">
+            <a href="../assets/research/kl-full-context.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/kl-full-context.webp" alt="Line chart of KL divergence against query position for global, sink and non-sink conditions. All values stay small, mostly below 0.1." width="1650" height="750" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Full context</span> How far next-token predictions shift when sink attention is removed, measured as KL divergence. It stays small at every position, mostly below 0.1.</figcaption>
+          </figure>
+          <figure class="plot">
+            <a href="../assets/research/streaming-nll.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/streaming-nll.webp" alt="Line chart of loss against position under windowed attention. With no sink token kept, loss jumps from about 3 to about 10 at position 128. Keeping 1 or 4 sink tokens stays close to the full-context baseline." width="1650" height="750" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Windowed attention</span> Once the window starts dropping early tokens (position 128), loss jumps from about 3 to about 10 if no sink is kept (blue). Keeping just one sink token (orange) stays close to the full-context baseline.</figcaption>
+          </figure>
+        </div></li>
+      </ol>
+      <p class="paper-lead conclusion">
+        Together these suggest the attention sink is better understood as a head-specific, layer-evolving routing
+        phenomenon whose causes and consequences depend on the architecture and the attention regime.
+      </p>
+    </section>
+
+    <!-- Reflection -->
+    <section class="app-section">
+      <h2>What I learned</h2>
+      <div class="app-desc">
+        <p>The project began much broader: I set out to compare how attention handles Vietnamese and English
+          tokenisation, but the near-identical sink behaviour in both redirected me. If the behaviour was the same,
+          the real question was the mechanism building it. That taught me the habit this project is built on: not to
+          stop at what a model does, but to look at its inside parts, variables and architecture. Reading into Qwen’s
+          GQA this way revealed the natural experiment that let me turn a vague interest into a specific, testable
+          claim about the query pathway.</p>
+      </div>
+      <figure class="plot plot-narrow">
+            <a href="../assets/research/language-profile.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/language-profile.webp" alt="Bar chart of mean sink score for each of 16 heads, English in blue and Vietnamese in red. The two bars are nearly the same height for every head, around 0.6." width="1094" height="644" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Where it started</span> Mean sink score per head on English (blue) and Vietnamese (red) text. The profiles are nearly identical, which is what turned the project from comparing languages to asking how the sink is built.</figcaption>
+          </figure>
+      <div class="app-desc">
+        <p>It also taught me to be suspicious of my own results. My query transplant first showed perfect transfer,
+          but looking at how I had set up the experiment made me realise the result was forced by construction, so it
+          could not establish causality. This pushed me to design the ripple and partial-transplant controls, to
+          produce evidence that was not guaranteed by construction.</p>
+      </div>
+      <div class="plot-pair">
+        <figure class="plot">
+            <a href="../assets/research/transfer-by-construction.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/transfer-by-construction.webp" alt="Two panels showing transfer fraction of exactly 1.0 for every metric and every intervened layer." width="2250" height="750" loading="lazy">
+            </a>
+            <figcaption><span class="mono">Too perfect</span> My first transplant result: transfer of exactly 1.0 on every metric and at every layer. That was a sign the setup forced the answer, not evidence of a cause.</figcaption>
+          </figure>
+        <figure class="plot">
+            <a href="../assets/research/ripple.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+              <img src="../assets/research/ripple.webp" alt="Two panels plotting transfer against distance downstream from the patched layer. Transfer is 1 at distance 0 and drops to around 0 at every later layer." width="2250" height="750" loading="lazy">
+            </a>
+            <figcaption><span class="mono">The ripple control</span> Measuring how far a transplant’s effect travels. Transfer is 1 at the patched layer and falls to around 0 straight after, so the effect is not simply copied down the network.</figcaption>
+          </figure>
+      </div>
+      <div class="app-desc">
+        <p>The process taught me to form hypotheses, design experiments and interpret results, and it prepared me to
+          investigate how local mechanisms give rise to wider model behaviour.</p>
+      </div>
+    </section>
+
+    <!-- Reading -->
+    <section class="app-section">
+      <h2>Code and reading</h2>
+      <ul class="link-list">
+        <li><a href="https://transformer-circuits.pub/2021/framework/index.html" target="_blank" rel="noopener"><span>A Mathematical Framework for Transformer Circuits (Elhage et al., 2021)</span><span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://github.com/hkchi-pham/attention-sink-research" target="_blank" rel="noopener"><span>Code and experiments: hkchi-pham/attention-sink-research</span><span aria-hidden="true">↗</span></a></li>
+        <li><a href="https://arxiv.org/abs/2309.17453" target="_blank" rel="noopener"><span>Efficient Streaming Language Models with Attention Sinks (Xiao et al., 2023)</span><span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer mono">
+    <p>© <span id="year"></span> Pham Ha Khanh Chi</p>
+    <p><a href="../index.html">Back to portfolio</a></p>
+  </footer>
+
+  <script src="project.js"></script>
+</body>
+</html>

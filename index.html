@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pham Ha Khanh Chi — Portfolio</title>
+  <meta name="description" content="Personal portfolio of Pham Ha Khanh Chi: academics, projects, activities and goals.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    document.documentElement.classList.add('js');
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Back to top">
+      <span class="brand-mark">KC</span>
+      <span class="brand-name">Khanh Chi</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#academics">Academics</a>
+      <a href="#projects">Projects</a>
+      <a href="#activities">Activities</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <p class="mono eyebrow reveal">(Class of 2027 · Applicant)</p>
+      <h1 class="hero-title" data-split>Pham Ha<br>Khanh Chi</h1>
+      <p class="hero-lead reveal">
+        Computer Science Student exploring the intersection of computation, mathematics,
+        and intelligent systems
+      </p>
+      <p class="mono hero-stats reveal">
+        <span><strong>9A*</strong> IGCSE</span>
+        <span><strong>4A*</strong> A Level (pred.)</span>
+        <span><strong>8.0</strong> IELTS</span>
+      </p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-solid" href="#projects">See my work</a>
+        <a class="btn btn-line" href="assets/resume.pdf" download>Download résumé</a>
+        <p class="signature" aria-hidden="true">— Khanh Chi</p>
+      </div>
+    </section>
+
+    <!-- FOLDERS -->
+    <section class="folders" aria-label="Portfolio">
+      <div class="tabs" role="tablist" aria-label="Portfolio folders">
+        <button class="tab" role="tab" id="tab-about" aria-controls="about" aria-selected="true" style="--f: var(--f-about)">
+          <span class="mono">(01)</span> About
+        </button>
+        <button class="tab" role="tab" id="tab-academics" aria-controls="academics" aria-selected="false" tabindex="-1" style="--f: var(--f-academics)">
+          <span class="mono">(02)</span> Academics
+        </button>
+        <button class="tab" role="tab" id="tab-projects" aria-controls="projects" aria-selected="false" tabindex="-1" style="--f: var(--f-projects)">
+          <span class="mono">(03)</span> Projects
+        </button>
+        <button class="tab" role="tab" id="tab-activities" aria-controls="activities" aria-selected="false" tabindex="-1" style="--f: var(--f-activities)">
+          <span class="mono">(04)</span> Activities
+        </button>
+      </div>
+
+      <!-- (01) ABOUT -->
+      <div class="panel" id="about" role="tabpanel" aria-labelledby="tab-about" tabindex="0" style="--f: var(--f-about)">
+        <div class="panel-head">
+          <p class="mono panel-num">(01) About me</p>
+          <h2 class="panel-title">Who I am and<br>why it matters</h2>
+        </div>
+
+        <ul class="desk" aria-label="At a glance">
+          <li class="note photo" style="--r: -4deg">
+            <!-- Replace with: <img src="assets/portrait.jpg" alt="Portrait of Khanh Chi"> -->
+            <div class="photo-placeholder">Your photo here</div>
+            <span class="mono">Hanoi, 2026</span>
+          </li>
+          <li class="note" style="--r: 3deg"><span class="mono">Based in</span><strong>Hanoi</strong><em>Vietnam</em></li>
+          <li class="note" style="--r: -2deg"><span class="mono">Drawn to</span><strong>CS + Maths</strong><em>and intelligent systems</em></li>
+          <li class="note" style="--r: 4deg"><span class="mono">Class of</span><strong>2027</strong><em>BVIS Hanoi</em></li>
+        </ul>
+
+        <div class="two-col">
+          <p class="lead">
+            The one thing I want you to remember about me is how I’m drawn to questions that
+            make me want to keep digging.
+          </p>
+          <div class="prose">
+            <p>My interest in Computer Science has grown from the wow factor of seeing technology for
+              the first time, to exploring how algorithms shape what we see, to studying the mechanisms
+              inside modern AI systems.</p>
+            <p>Throughout this journey, I enjoy learning independently, reading beyond the curriculum,
+              and turning questions into experiments and projects. Whether I’m investigating transformer
+              models or building an application, I’m most interested in diving into why they work, but
+              more especially what impact it could make.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- (02) ACADEMICS -->
+      <div class="panel" id="academics" role="tabpanel" aria-labelledby="tab-academics" tabindex="0" hidden style="--f: var(--f-academics)">
+        <div class="panel-head">
+          <p class="mono panel-num">(02) Academics</p>
+          <h2 class="panel-title">Learning in<br>the classroom</h2>
+        </div>
+
+        <ul class="desk" aria-label="Highlights">
+          <li class="note" style="--r: -3deg"><span class="mono">IGCSE · 2025</span><strong>9A*</strong><em>and 1A</em></li>
+          <li class="note" style="--r: 2deg"><span class="mono">A Level · pred.</span><strong>4A*</strong><em>Maths, Further Maths, Physics, Eng Lit</em></li>
+          <li class="note" style="--r: -5deg"><span class="mono">IELTS · 2026</span><strong>8.0</strong><em>Listening 9.0</em></li>
+          <li class="note" style="--r: 4deg"><span class="mono">UKMT · 2025</span><strong>Silver</strong><em>Senior Challenge</em></li>
+          <li class="note" style="--r: -1deg"><span class="mono">UKMT · 2024</span><strong>Gold</strong><em>Intermediate Challenge</em></li>
+        </ul>
+
+        <h3 class="sub-label mono">[ Education ]</h3>
+        <div class="rows">
+          <article class="row">
+            <p class="row-date mono">2018 — 2027</p>
+            <div class="row-main">
+              <h4>British Vietnamese International School Hanoi</h4>
+              <p class="row-meta">Hanoi, Vietnam</p>
+            </div>
+            <p class="row-desc">Cambridge IGCSE and A Level programme.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-label mono">[ Qualifications ]</h3>
+        <div class="rows">
+          <article class="row">
+            <p class="row-date mono">2025 — 2027</p>
+            <div class="row-main"><h4>A Level</h4><p class="row-meta">4A* predicted</p></div>
+            <p class="row-desc">Mathematics, Further Mathematics, Physics, English Literature.</p>
+          </article>
+          <article class="row">
+            <p class="row-date mono">2023 — 2025</p>
+            <div class="row-main"><h4>IGCSE</h4><p class="row-meta">9A* · 1A</p></div>
+            <div class="row-desc">
+              <p><strong class="grade">A*</strong> Mathematics, Additional Mathematics, History, Business,
+                First Language English, First Language Vietnamese, English Literature,
+                Co-ordinated Science (Double Award).</p>
+              <p class="grade-line"><strong class="grade">A</strong> Computer Science.</p>
+            </div>
+          </article>
+          <article class="row">
+            <p class="row-date mono">2026</p>
+            <div class="row-main"><h4>IELTS Academic</h4><p class="row-meta">Overall band 8.0</p></div>
+            <ul class="bands" aria-label="IELTS band scores">
+              <li><strong>9.0</strong><span>Listening</span></li>
+              <li><strong>8.0</strong><span>Reading</span></li>
+              <li><strong>7.0</strong><span>Speaking</span></li>
+              <li><strong>7.0</strong><span>Writing</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <h3 class="sub-label mono">[ Competitions ]</h3>
+        <div class="rows">
+          <article class="row">
+            <p class="row-date mono">2025</p>
+            <div class="row-main"><h4>UK Mathematics Trust — Senior Challenge</h4><p class="row-meta">International</p></div>
+            <p class="row-desc"><strong class="grade">Silver</strong></p>
+          </article>
+          <article class="row">
+            <p class="row-date mono">2025</p>
+            <div class="row-main"><h4>Olympic Miền Trung – Tây Nguyên, Bảng AI Challenge</h4><p class="row-meta">Regional</p></div>
+            <div class="row-desc">
+              <p><strong class="grade">Giải Khuyến Khích</strong></p>
+              <p class="grade-line">Consolation prize in the AI Challenge division of the Central Highlands regional olympiad.</p>
+            </div>
+          </article>
+          <article class="row">
+            <p class="row-date mono">2025</p>
+            <div class="row-main"><h4>Tin học trẻ Miền Bắc</h4><p class="row-meta">Regional</p></div>
+            <div class="row-desc">
+              <p><strong class="grade">Giải Ba</strong></p>
+              <p class="grade-line">Third prize at the Northern Vietnam round of the national youth informatics competition.</p>
+            </div>
+          </article>
+          <article class="row">
+            <p class="row-date mono">2024</p>
+            <div class="row-main"><h4>UK Mathematics Trust — Intermediate Challenge</h4><p class="row-meta">International</p></div>
+            <p class="row-desc"><strong class="grade">Gold</strong></p>
+          </article>
+        </div>
+      </div>
+
+      <!-- (03) PROJECTS -->
+      <div class="panel" id="projects" role="tabpanel" aria-labelledby="tab-projects" tabindex="0" hidden style="--f: var(--f-projects)">
+        <div class="panel-head">
+          <p class="mono panel-num">(03) Projects</p>
+          <h2 class="panel-title">Things I've<br>made</h2>
+        </div>
+
+        <ul class="desk desk-shots" aria-label="Project highlights">
+          <li class="note photo shot" style="--r: -5deg">
+            <img src="assets/soul-garden/screen-chat.webp" alt="Soul Garden chat screen with Hana, the AI companion" width="720" height="1564" loading="lazy">
+          </li>
+          <li class="note photo shot" style="--r: 2deg">
+            <img src="assets/soul-garden/screen-garden.webp" alt="Soul Garden illustrated garden with a cherry blossom tree" width="720" height="1564" loading="lazy">
+          </li>
+          <li class="note photo shot" style="--r: -2deg">
+            <img src="assets/soul-garden/screen-journal.webp" alt="Soul Garden journal screen with a diary entry" width="720" height="1564" loading="lazy">
+          </li>
+          <li class="note photo shot" style="--r: 5deg">
+            <img src="assets/soul-garden/screen-calendar.webp" alt="Soul Garden mood calendar" width="720" height="1564" loading="lazy">
+          </li>
+          <li class="note" style="--r: -3deg; --f: var(--f-academics)"><span class="mono">Research · Qwen3</span><strong>Attention sinks</strong><em>Query transplants, 3 angles</em></li>
+        </ul>
+
+        <div class="cards">
+          <a class="card card-link" href="projects/soul-garden.html">
+            <div class="card-media media-soul">
+              <img src="assets/soul-garden/icon.webp" alt="" width="512" height="512">
+            </div>
+            <div class="card-text">
+              <p class="card-kicker mono">iOS app · AI · Well-being</p>
+              <h3>Soul Garden</h3>
+              <p>Mental health AI chatbot app paired with peaceful journal and relaxing garden.</p>
+              <span class="text-link">View project →</span>
+            </div>
+          </a>
+          <a class="card card-link" href="projects/attention-sinks.html">
+            <div class="card-media media-attn">
+              <svg class="attn" viewBox="0 0 214 214" aria-hidden="true"><rect class="sink" x="0" y="0" width="16" height="16" rx="3" fill-opacity="0.95"/><rect class="sink" x="0" y="18" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="18" width="16" height="16" rx="3" fill-opacity="0.22"/><rect class="sink" x="0" y="36" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="36" width="16" height="16" rx="3" fill-opacity="0.07"/><rect x="36" y="36" width="16" height="16" rx="3" fill-opacity="0.26"/><rect class="sink" x="0" y="54" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="54" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="36" y="54" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="54" y="54" width="16" height="16" rx="3" fill-opacity="0.22"/><rect class="sink" x="0" y="72" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="72" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="36" y="72" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="54" y="72" width="16" height="16" rx="3" fill-opacity="0.05"/><rect x="72" y="72" width="16" height="16" rx="3" fill-opacity="0.23"/><rect class="sink" x="0" y="90" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="90" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="36" y="90" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="54" y="90" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="72" y="90" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="90" y="90" width="16" height="16" rx="3" fill-opacity="0.19"/><rect class="sink" x="0" y="108" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="108" width="16" height="16" rx="3" fill-opacity="0.07"/><rect x="36" y="108" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="54" y="108" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="72" y="108" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="90" y="108" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="108" y="108" width="16" height="16" rx="3" fill-opacity="0.30"/><rect class="sink" x="0" y="126" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="126" width="16" height="16" rx="3" fill-opacity="0.05"/><rect x="36" y="126" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="54" y="126" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="72" y="126" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="90" y="126" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="108" y="126" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="126" y="126" width="16" height="16" rx="3" fill-opacity="0.28"/><rect class="sink" x="0" y="144" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="144" width="16" height="16" rx="3" fill-opacity="0.07"/><rect x="36" y="144" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="54" y="144" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="72" y="144" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="90" y="144" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="108" y="144" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="126" y="144" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="144" y="144" width="16" height="16" rx="3" fill-opacity="0.20"/><rect class="sink" x="0" y="162" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="162" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="36" y="162" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="54" y="162" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="72" y="162" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="90" y="162" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="108" y="162" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="126" y="162" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="144" y="162" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="162" y="162" width="16" height="16" rx="3" fill-opacity="0.21"/><rect class="sink" x="0" y="180" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="180" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="36" y="180" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="54" y="180" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="72" y="180" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="90" y="180" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="108" y="180" width="16" height="16" rx="3" fill-opacity="0.15"/><rect x="126" y="180" width="16" height="16" rx="3" fill-opacity="0.06"/><rect x="144" y="180" width="16" height="16" rx="3" fill-opacity="0.09"/><rect x="162" y="180" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="180" y="180" width="16" height="16" rx="3" fill-opacity="0.20"/><rect class="sink" x="0" y="198" width="16" height="16" rx="3" fill-opacity="0.95"/><rect x="18" y="198" width="16" height="16" rx="3" fill-opacity="0.10"/><rect x="36" y="198" width="16" height="16" rx="3" fill-opacity="0.05"/><rect x="54" y="198" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="72" y="198" width="16" height="16" rx="3" fill-opacity="0.13"/><rect x="90" y="198" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="108" y="198" width="16" height="16" rx="3" fill-opacity="0.14"/><rect x="126" y="198" width="16" height="16" rx="3" fill-opacity="0.08"/><rect x="144" y="198" width="16" height="16" rx="3" fill-opacity="0.12"/><rect x="162" y="198" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="180" y="198" width="16" height="16" rx="3" fill-opacity="0.11"/><rect x="198" y="198" width="16" height="16" rx="3" fill-opacity="0.23"/></svg>
+            </div>
+            <div class="card-text">
+              <p class="card-kicker mono">Individual research · 2026</p>
+              <h3>Rethinking Attention Sinks</h3>
+              <p>Why do some attention heads in Qwen3-1.7B become sinks? Using grouped-query attention as a natural experiment, I found the query pathway is a causal contributor.</p>
+              <span class="text-link">Read the research →</span>
+            </div>
+          </a>
+          <article class="card">
+            <div class="card-media media-c"><span>03</span></div>
+            <div class="card-text">
+              <p class="card-kicker mono">[Creative] · [Year]</p>
+              <h3>[Art, writing or design work]</h3>
+              <p>[What it is, why you made it, where it was shown or published.]</p>
+              <a class="text-link" href="#">See gallery →</a>
+            </div>
+          </article>
+          <article class="card card-outline">
+            <div class="card-media media-d" aria-hidden="true">
+              <svg viewBox="0 0 120 120" width="96" height="96"><g stroke="currentColor" stroke-width="1" fill="none"><circle cx="60" cy="60" r="44"/><circle cx="60" cy="60" r="28"/><circle cx="60" cy="60" r="12"/></g></svg>
+            </div>
+            <div class="card-text">
+              <p class="card-kicker mono">In progress</p>
+              <h3>[What you're working on now]</h3>
+              <p>[Show momentum — admissions officers like to see where you're heading.]</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- (04) ACTIVITIES -->
+      <div class="panel" id="activities" role="tabpanel" aria-labelledby="tab-activities" tabindex="0" hidden style="--f: var(--f-activities)">
+        <div class="panel-head">
+          <p class="mono panel-num">(04) Activities</p>
+          <h2 class="panel-title">Beyond the<br>classroom</h2>
+        </div>
+
+        <ul class="desk" aria-label="Highlights">
+          <li class="note" style="--r: 3deg"><span class="mono">Languages</span><strong>VI · EN</strong><em>Native · IELTS 8.0</em></li>
+          <li class="note" style="--r: -4deg"><span class="mono">[2024 — now]</span><strong>[Role]</strong><em>[Organisation]</em></li>
+          <li class="note" style="--r: 2deg"><span class="mono">[Summer 2025]</span><strong>[Programme]</strong><em>[Host]</em></li>
+        </ul>
+
+        <h3 class="sub-label mono">[ Leadership &amp; service ]</h3>
+        <div class="rows">
+          <article class="row">
+            <p class="row-date mono">[2024 — now]</p>
+            <div class="row-main"><h4>[Role]</h4><p class="row-meta">[Organisation]</p></div>
+            <p class="row-desc">[What you led or started, how many people, what changed because of it.]</p>
+          </article>
+          <article class="row">
+            <p class="row-date mono">[2023 — 2024]</p>
+            <div class="row-main"><h4>[Role]</h4><p class="row-meta">[Organisation]</p></div>
+            <p class="row-desc">[Hours per week, responsibilities, one measurable outcome.]</p>
+          </article>
+          <article class="row">
+            <p class="row-date mono">[Summer 2025]</p>
+            <div class="row-main"><h4>[Programme / internship]</h4><p class="row-meta">[Host]</p></div>
+            <p class="row-desc">[What you did and the skill you took away.]</p>
+          </article>
+        </div>
+
+        <h3 class="sub-label mono">[ Skills ]</h3>
+        <div class="skills">
+          <div><h4>Languages</h4><p>Vietnamese (native) · English ([level]) · [Other]</p></div>
+          <div><h4>Technical</h4><p>[Skill] · [Skill] · [Skill]</p></div>
+          <div><h4>Creative</h4><p>[Skill] · [Skill] · [Skill]</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <p class="mono panel-num reveal">(05) Contact</p>
+      <h2 class="section-title reveal">Let's talk</h2>
+      <p class="lead reveal">Happy to share more work, a writing sample, or answer any questions.</p>
+      <a class="big-link reveal" href="mailto:khanhchi.phamha@gmail.com">khanhchi.phamha@gmail.com</a>
+      <ul class="socials reveal">
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">GitHub</a></li>
+        <li><a href="assets/resume.pdf" download>Résumé (PDF)</a></li>
+      </ul>
+      <p class="signature signature-lg reveal">— Khanh Chi</p>
+    </section>
+  </main>
+
+  <footer class="site-footer mono">
+    <p>© <span id="year"></span> Pham Ha Khanh Chi</p>
+    <p>Hanoi, Vietnam</p>
+    <p>Made by hand</p>
+  </footer>
+
+  <a class="to-top" href="#home" aria-label="Back to top">↑</a>
+
+  <script src="main.js"></script>
+</body>
+</html>
