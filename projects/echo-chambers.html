@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Echo Chambers in Recommender Systems — Pham Ha Khanh Chi</title>
+  <meta name="description" content="STEM Club research project for the CREST Silver Award: do recommender algorithms create echo chambers, and what does a simulation need before it can detect one?">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="project.css">
+  <script>
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body class="project-page research-page" style="--f: var(--f-projects)">
+  <header class="project-bar">
+    <a class="back-link" href="../index.html#projects"><span aria-hidden="true">←</span> Projects</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+  </header>
+
+  <main class="app-page">
+    <!-- Paper header -->
+    <section class="paper-head">
+      <p class="mono paper-kicker">(03) Team research · STEM Club · CREST Silver</p>
+      <h1>Echo Chambers in Recommender Systems</h1>
+      <p class="paper-sub">Do recommender algorithms narrow what users see, and what does a simulation need before it can tell?</p>
+      <p class="app-dev">Pham Ha Khanh Chi · research mentor</p>
+      <p class="mono paper-meta">2026 · BVIS Hanoi STEM Club · CREST Silver Award applicant</p>
+    </section>
+
+    <!-- Info strip -->
+    <ul class="info-strip" aria-label="Project details">
+      <li><span>Data</span><strong>MovieLens</strong><em>100 simulated users</em></li>
+      <li><span>Per round</span><strong>10</strong><em>recommendations</em></li>
+      <li><span>Algorithms</span><strong>3 + 1</strong><em>plus a random control</em></li>
+      <li><span>Defects fixed</span><strong>5</strong><em>each with a diagnostic</em></li>
+      <li><span>My role</span><strong>Mentor</strong><em>validity and design</em></li>
+    </ul>
+
+    <!-- Summary -->
+    <section class="app-section">
+      <h2>In short</h2>
+      <p class="paper-lead">
+        The early results looked clean, and every one of them turned out to be a bug. Once the simulation was fixed, the three
+        standard algorithms were no different from random. The real contribution is knowing <em>why</em>, and what a simulation
+        needs before it can detect an echo chamber at all.
+      </p>
+    </section>
+
+    <!-- Overview -->
+    <section class="app-section">
+      <h2>Research overview</h2>
+      <div class="app-desc">
+        <p>This project asked whether recommender algorithms (popularity-based, content-based and collaborative filtering)
+          gradually narrow what users see, creating an “echo chamber”. We tested this in a simulation: 100 MovieLens users,
+          each receiving ten recommendations per round, “clicking” according to their genre preferences, with that behaviour
+          fed back into the system. We tracked genre diversity and Shannon entropy over time to compare how each algorithm behaved.</p>
+        <p>Echo chambers get blamed for political polarisation and radicalisation online, and for people discovering less new
+          content. But much of that is assumed rather than tested. I wanted to see whether the effect really shows up under
+          controlled conditions, and what you would need to measure it properly.</p>
+        <p>The early results looked clean: collaborative filtering broadened exposure, content-based filtering narrowed it, and
+          popularity swung widely. Every one of those turned out to be a bug in the simulation rather than a real effect.
+          Once we had found and corrected the flaws, the three original algorithms showed no difference from random recommendation.</p>
+      </div>
+      <figure class="plot plot-narrow">
+        <a href="../assets/echo/baseline-genre-diversity.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+          <img src="../assets/echo/baseline-genre-diversity.webp" alt="Line chart of genre diversity over 30 rounds for the original baseline: collaborative filtering rises from about 11 to 12.7 genres, content-based falls from about 11.7 to 8, and popularity swings between 9 and 15." width="1000" height="600" loading="lazy">
+        </a>
+        <figcaption><span class="mono">Before: the original baseline</span> The first results looked like three distinct stories: collaborative filtering broadening, content-based narrowing, and popularity swinging wildly. All three trends turned out to be created by bugs in the simulation, not real effects.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Approach -->
+    <section class="app-section">
+      <h2>Approach</h2>
+      <div class="steps">
+        <article>
+          <p class="mono">(01) Control</p>
+          <h3>Simulate, against random</h3>
+          <p>A simulation let us isolate mechanisms under controlled conditions. Alongside the three baseline algorithms we added
+            a random-recommendation control, so changes were compared against noise rather than against zero.</p>
+        </article>
+        <article>
+          <p class="mono">(02) Check</p>
+          <h3>Could the design show an effect?</h3>
+          <p>When the corrected baseline showed nothing, I tested the design itself. Content-based filtering at click rates 100×
+            apart gave bit-identical recommendations, so it had no feedback loop. Collaborative filtering’s signal came from
+            neighbouring users, not the individual.</p>
+        </article>
+        <article>
+          <p class="mono">(03) Redesign</p>
+          <h3>Separate taste from the guess</h3>
+          <p>No algorithm both read one user’s preferences and updated from that user’s behaviour. So I split each user’s true
+            taste (which drives clicks, hidden from the algorithm) from the algorithm’s inferred profile, and built an adaptive
+            content-based algorithm whose clicks update only the inferred profile.</p>
+        </article>
+      </div>
+      <figure class="figure">
+        <svg class="loop" viewBox="0 0 520 260" role="img" aria-label="Diagram of the redesigned simulation: the algorithm's inferred profile produces recommendations, the user clicks according to their hidden true taste, and the clicks update the inferred profile. Drift is the gap between true taste and inferred profile.">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="loop-head" d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="loop-lines" fill="none" stroke-width="1.6" marker-end="url(#arrow)">
+            <path d="M330 52 C420 52 440 90 440 118"/>
+            <path d="M440 168 C440 200 420 214 330 214"/>
+            <path d="M190 214 C110 214 96 180 96 150"/>
+            <path d="M96 106 C96 72 120 52 190 52"/>
+          </g>
+          <path class="loop-hidden" d="M260 132 L364 150" fill="none" stroke-width="1.6" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+          <rect class="loop-node" x="190" y="30" width="140" height="44" rx="10"/>
+          <rect class="loop-node" x="370" y="118" width="140" height="50" rx="10"/>
+          <rect class="loop-node" x="190" y="192" width="140" height="44" rx="10"/>
+          <rect class="loop-node is-model" x="16" y="106" width="160" height="44" rx="10"/>
+          <rect class="loop-taste" x="180" y="112" width="96" height="40" rx="20"/>
+          <g class="loop-text" text-anchor="middle">
+            <text x="260" y="57">Recommendations</text>
+            <text x="440" y="140">Clicks</text>
+            <text class="loop-sub" x="440" y="157">driven by true taste</text>
+            <text x="260" y="219">Click history</text>
+            <text class="on-model" x="96" y="133">Inferred profile</text>
+            <text class="loop-sub" x="228" y="136">true taste</text>
+            <text class="loop-sub" x="228" y="148">(hidden)</text>
+          </g>
+        </svg>
+        <figcaption>
+          <span class="mono">The redesigned loop</span>
+          Clicks come from the user’s hidden true taste, but only update the algorithm’s guess. Measuring the gap between the two
+          shows how far an algorithm’s model of a user drifts from who that user really is.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Evaluation -->
+    <section class="app-section">
+      <h2>Evaluation: five defects</h2>
+      <p class="app-desc">Each defect was isolated with a diagnostic and confirmed with a controlled comparison.</p>
+      <ol class="findings">
+        <li><span class="mono">01</span><p><strong>Shared rating matrix.</strong> Users’ simulated clicks leaked into later users’
+          collaborative-filtering calculations. This created the whole +1.57-genre “broadening”; giving each user their own copy made it vanish.</p></li>
+        <li><span class="mono">02</span><p><strong>Inconsistent exclusion.</strong> Popularity and content-based filtering were
+          recommending films users had already rated (17.8% and 3.3% of recommendations).</p></li>
+        <li><span class="mono">03</span><p><strong>Profiles measuring sparsity, not taste.</strong> Preference concentration
+          correlated with rating count at ρ = +0.715. Rebuilding profiles from viewing proportions made the click model about
+          3.4× better at telling a user’s top genre apart from the rest.</p></li>
+        <li><span class="mono">04</span><p><strong>Unrealistic click rate.</strong> Click rate had been set equal to the affinity
+          score, giving 49–69% against a realistic 1–5%, so we recalibrated it.</p></li>
+        <li><span class="mono">05</span><p><strong>Biased tie-breaking.</strong> Ties went to the film with the higher ID, which
+          favours newer films. This affected 91–97% of content-based picks.</p></li>
+      </ol>
+      <p class="paper-lead conclusion">
+        After all that, there was one real effect. The adaptive algorithm narrowed genre variety significantly more than the
+        fixed one, by about 1.3 genres, and it was the only version that clearly beat the random baseline. Users saw
+        <em>more different films</em>, but from <em>fewer genres</em>, and the narrowing levelled off after about 30 rounds instead of spiralling.
+      </p>
+      <figure class="plot">
+        <a href="../assets/echo/genre-diversity-corrected.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+          <img src="../assets/echo/genre-diversity-corrected.webp" alt="Line chart of genre diversity over 100 rounds after the fixes. Popularity and collaborative filtering cycle around or above the random-control band near 10.8 genres; static content-based cycles between about 4 and 5; adaptive content-based falls from 5 to about 3 and levels off." width="1500" height="900" loading="lazy">
+        </a>
+        <figcaption><span class="mono">After: corrected genre diversity, 100 rounds</span> Only the adaptive content-based algorithm narrows over time, dropping to about 3 genres per list and levelling off after roughly 30 rounds rather than spiralling. The other three show no narrowing beyond the cycle created by the 10-round cooldown. The shaded band (rounds 90–100) is the last full cycle, which we used as the main comparison window.</figcaption>
+      </figure>
+      <figure class="plot">
+        <a href="../assets/echo/entropy-corrected.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+          <img src="../assets/echo/entropy-corrected.webp" alt="Line chart of per-round Shannon entropy over 100 rounds with a corrected estimator. Popularity and collaborative filtering sit around 3.9 to 4.3 bits, above the random-control band near 3.65; static content-based cycles between about 1.7 and 2.2; adaptive content-based settles near 1.5." width="1500" height="900" loading="lazy">
+        </a>
+        <figcaption><span class="mono">After: corrected Shannon entropy</span> Entropy tells the same story as genre diversity from a different angle: the adaptive content-based algorithm settles at the lowest genre spread. The repeating sawtooth comes from the 10-round cooldown, so we averaged the last full cycle (rounds 90–100) to compare algorithms fairly.</figcaption>
+      </figure>
+      <figure class="plot">
+        <a href="../assets/echo/item-concentration.webp" target="_blank" rel="noopener" aria-label="Open full-size figure">
+          <img src="../assets/echo/item-concentration.webp" alt="Line chart of cumulative item-level exposure concentration over 100 rounds. It is zero for the first 10 rounds, then rises to about 0.30 for popularity, static content-based and collaborative filtering, and about 0.26 for adaptive content-based; the random control stays near zero." width="1500" height="900" loading="lazy">
+        </a>
+        <figcaption><span class="mono">After: how often films repeat</span> This tracks how often the same films are shown to a user again (0 means every impression is a different film). The adaptive algorithm has the lowest repetition of the four, so it narrows genres <em>without</em> showing the same titles more often. Concentration stays at zero for the first 10 rounds by design, because films cannot return until the cooldown ends.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Role -->
+    <section class="app-section">
+      <h2>My role</h2>
+      <div class="app-desc">
+        <p>I was the team’s research mentor, so checking that the work was valid was my job. When collaborative filtering kept
+          trending upward and popularity was jumping around too much to be believable, I did not just accept the explanations
+          my teammates gave me. I audited the code myself and walked them through each bug as it came to light.</p>
+        <p>From there I directed the investigation, deciding what to test and which results not to trust, and I caught mistakes
+          in my own analysis too. I made the main design calls: separating true taste from the algorithm’s guess, building the
+          adaptive algorithm and adding the random baseline. I also helped my teammates explain their parts of the project, and
+          wrote up the evaluation for our CREST Silver report.</p>
+      </div>
+    </section>
+
+    <section class="app-section">
+      <h2>Context</h2>
+      <ul class="link-list">
+        <li><a href="../index.html#activities"><span>Part of BVIS STEM Club, which I co-founded</span><span aria-hidden="true">→</span></a></li>
+        <li><a href="https://grouplens.org/datasets/movielens/" target="_blank" rel="noopener"><span>MovieLens datasets (GroupLens)</span><span aria-hidden="true">↗</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer mono">
+    <p>© <span id="year"></span> Pham Ha Khanh Chi</p>
+    <p><a href="../index.html">Back to portfolio</a></p>
+  </footer>
+
+  <script src="project.js"></script>
+</body>
+</html>

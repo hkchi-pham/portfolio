@@ -134,6 +134,14 @@
 .gqa text:nth-child(2) { fill: #f2efe9; }
 .gqa > text.gqa-text { fill: var(--bg); }
 
+.loop .loop-lines, .loop .loop-hidden { stroke: var(--ink); opacity: .55; }
+.loop .loop-head { fill: var(--ink); opacity: .55; }
+.loop .loop-node { fill: var(--paper); stroke: var(--ink); stroke-opacity: .25; }
+.loop .loop-node.is-model { fill: #4f6b3a; stroke: none; }
+.loop .loop-taste { fill: none; stroke: var(--ink); stroke-opacity: .45; stroke-dasharray: 4 4; }
+.loop text { font: 500 15px var(--display); fill: var(--ink); }
+.loop text.loop-sub { font: 500 10.5px var(--mono); text-transform: uppercase; fill: var(--ink-2); }
+.loop text.on-model { fill: #f2efe9; }
 .paper-meta { margin-top: 10px; color: var(--ink-2); }
 
 /* Result plots: kept on white plates, like printed figures, in both themes */
