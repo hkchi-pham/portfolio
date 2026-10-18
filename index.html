@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,9 +11,14 @@
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    } }
+  </script>
   <script>
     document.documentElement.classList.add('js');
-    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
 </head>
 <body>
@@ -29,7 +34,6 @@
       <a href="#activities">Activities</a>
       <a href="#contact">Contact</a>
     </nav>
-    <button class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span>
     </button>
@@ -38,6 +42,7 @@
   <main>
     <!-- HERO -->
     <section id="home" class="hero">
+      <div class="hero-sky" aria-hidden="true"></div>
       <p class="mono eyebrow reveal">(Class of 2027 · Applicant)</p>
       <h1 class="hero-title" data-split>Pham Ha<br>Khanh Chi</h1>
       <p class="hero-lead reveal">
@@ -570,5 +575,6 @@
   <a class="to-top" href="#home" aria-label="Back to top">↑</a>
 
   <script src="main.js"></script>
+  <script type="module" src="sky.js"></script>
 </body>
 </html>

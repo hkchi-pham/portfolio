@@ -22,7 +22,7 @@
 .app-icon {
   width: clamp(110px, 16vw, 160px); height: auto; aspect-ratio: 1;
   border-radius: 22.5%;
-  box-shadow: 0 0 0 1px var(--line), 0 10px 30px rgba(0, 0, 0, .12);
+  box-shadow: 0 0 0 1px var(--line), 0 10px 30px rgba(5, 12, 34, .4);
 }
 .app-id h1 { font-size: clamp(26px, 3.4vw, 40px); font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
 .app-sub { margin-top: 8px; font-size: clamp(16px, 1.6vw, 19px); max-width: 560px; }
@@ -35,8 +35,9 @@
 }
 .pill:hover { transform: translateY(-1px); }
 .pill-solid { background: var(--accent); color: var(--on-accent); }
+.pill-solid:hover { background: var(--highlight-soft); }
 .pill-line { border: 1px solid var(--ink); color: var(--ink); }
-.pill-line:hover { background: var(--ink); color: var(--bg); }
+.pill-line:hover { background: var(--highlight); border-color: var(--highlight); color: var(--royal); }
 
 /* Info strip */
 .info-strip {
@@ -127,24 +128,24 @@
 
 .gqa .gqa-lines { stroke: var(--ink); opacity: .45; }
 .gqa .gqa-q rect { fill: var(--paper); stroke: var(--ink); stroke-opacity: .25; }
-.gqa .gqa-q rect.is-sink { fill: #3d5a80; stroke: none; }
+.gqa .gqa-q rect.is-sink { fill: var(--sapphire); stroke: none; }
 .gqa .gqa-kv { fill: var(--ink); }
 .gqa text { font: 500 15px var(--display); fill: var(--ink); }
 .gqa text.gqa-tag { font: 500 11px var(--mono); text-transform: uppercase; fill: var(--ink-2); }
-.gqa text:nth-child(2) { fill: #f2efe9; }
-.gqa > text.gqa-text { fill: var(--bg); }
+.gqa text:nth-child(2) { fill: var(--swan); }
+.gqa > text.gqa-text { fill: var(--royal); }
 
 .loop .loop-lines, .loop .loop-hidden { stroke: var(--ink); opacity: .55; }
 .loop .loop-head { fill: var(--ink); opacity: .55; }
 .loop .loop-node { fill: var(--paper); stroke: var(--ink); stroke-opacity: .25; }
-.loop .loop-node.is-model { fill: #4f6b3a; stroke: none; }
+.loop .loop-node.is-model { fill: var(--sapphire); stroke: none; }
 .loop .loop-taste { fill: none; stroke: var(--ink); stroke-opacity: .45; stroke-dasharray: 4 4; }
 .loop text { font: 500 15px var(--display); fill: var(--ink); }
 .loop text.loop-sub { font: 500 10.5px var(--mono); text-transform: uppercase; fill: var(--ink-2); }
-.loop text.on-model { fill: #f2efe9; }
+.loop text.on-model { fill: var(--swan); }
 .paper-meta { margin-top: 10px; color: var(--ink-2); }
 
-/* Result plots: kept on white plates, like printed figures, in both themes */
+/* Result plots: kept on white plates, like printed figures */
 .plot { margin: 22px 0 0; }
 .plot a { display: block; border-radius: 14px; background: #fff; padding: clamp(8px, 1.4vw, 16px); box-shadow: var(--shadow); transition: transform .4s var(--ease); }
 .plot a:hover { transform: translateY(-3px); }
