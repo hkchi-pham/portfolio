@@ -57,23 +57,26 @@
     <section class="app-section">
       <h2>About this project</h2>
       <div class="app-desc" id="desc">
-        <p>Outside the classroom, I built Soul Garden, a chatbot supporting the well-being of Vietnamese
-          teenagers, because as a teenager myself I know how rarely we have space to express what we actually feel.</p>
-        <p>It pairs LLM-generated conversation with a rule-based selector I wrote to suggest activities from
-          emotional expressions in Vietnamese, where slang and metaphor defeat off-the-shelf sentiment tools.
-          The selector read each message accurately but failed across a conversation: [e.g. it suggested a
-          breathing exercise to someone who had just said they felt better]. It lacked the context the language
-          model had, so I redesigned the pipeline to track mood across messages and coordinate suggestions with
-          response generation.</p>
-        <p>That fix shaped how I think about problems. I became fascinated by the relationship between
-          decomposition and integration: splitting a problem into parts small enough to solve while preserving
-          the dependencies between them. Soul Garden taught me to test my own assumptions and to rebuild when
-          they were wrong.</p>
-        <p>I hope it becomes a low-barrier first step for teenagers who could not go to a therapist, one that
-          makes talking about feelings feel comfortable and points them towards real human support, such as
-          helplines, when they need more than an app can give. Reaching that point means treating safety and
-          cultural nuance as engineering problems in their own right, and that is the kind of technology I want
-          to learn to build well.</p>
+        <p>Outside the classroom, I built Soul Garden, a chatbot supporting the well-being of
+          Vietnamese teenagers. I made this because as a teenager myself, I understand how
+          rare space is to express what we really feel.</p>
+        <p>The chatbot pairs LLM-generated conversation with a rule-based selector I wrote to
+          suggest activities from emotional expressions in Vietnamese, where slang and
+          metaphor defeat off-the-shelf sentiment tools.</p>
+        <p>In practice, the selector did read each message accurately but failed across a
+          conversation: it suggested a breathing exercise to someone who had just said they felt
+          better. It lacked the context the language model had, so I redesigned the pipeline to
+          track mood across messages and coordinate suggestions with response generation.</p>
+        <p>That fix shaped how I think about problems. I became fascinated by the relationship
+          between decomposition and integration: splitting a problem into parts small enough to
+          solve while preserving the dependencies between them. Soul Garden taught me to test
+          my assumptions and rebuild when they were wrong.</p>
+        <p>I hope Soul Garden becomes a low-barrier first step for teenagers who can’t see a
+          therapist. An app that makes talking about feelings feel comfortable, pointing teenagers
+          towards real human support, such as helplines when they need more than an app could
+          give. Reaching that point means treating safety and cultural nuance as engineering
+          problems in their own right, and that is the kind of technology I want to learn to build
+          very well.</p>
       </div>
       <button class="more" type="button" aria-expanded="false" aria-controls="desc">more</button>
     </section>
