@@ -372,6 +372,13 @@ main { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
 .echo rect { fill: var(--ink); }
 .echo rect.on { fill: var(--gold); }
 .echo text { font: 500 11px var(--mono); fill: var(--ink); opacity: .6; text-transform: uppercase; }
+.media-melon { background: color-mix(in srgb, var(--f-about) var(--f-mix), var(--bg)); }
+.media-melon .plates { width: 58%; transition: transform .5s var(--ease); }
+.card-link:hover .media-melon .plates { transform: scale(1.04); }
+/* schematic grid of agar plates: the most suitable temperature per melon in accent */
+.plates circle { fill: none; stroke: var(--ink); stroke-opacity: .45; stroke-width: 1.5; }
+.plates circle.best { fill: var(--gold); stroke: none; }
+.plates text { font: 500 11px var(--mono); fill: var(--ink); opacity: .6; text-anchor: middle; }
 .media-b { background: linear-gradient(140deg, var(--royal), var(--sapphire)); color: var(--swan); }
 .media-c { background: linear-gradient(140deg, var(--shell), var(--quicksand)); color: var(--royal); }
 .card-text { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }

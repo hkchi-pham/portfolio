@@ -169,6 +169,18 @@
 .findings p { font-size: 17px; color: var(--ink); }
 .findings strong { font-weight: 600; }
 
+.data-table-wrap { margin-top: 22px; max-width: 900px; overflow-x: auto; }
+.data-table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15.5px; line-height: 1.55; color: var(--ink); }
+.data-table th, .data-table td { text-align: left; vertical-align: top; padding: 14px 18px 14px 0; border-bottom: 1px solid var(--line); }
+.data-table thead th { font: 11px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--ink-2); border-top: 1px solid var(--line); }
+.data-table tbody th { font-weight: 600; white-space: nowrap; }
+.app-section h3.sub-head { font-size: 19px; font-weight: 600; margin: 32px 0 14px; }
+
+.plate-grid .plate { fill: none; stroke: var(--ink); stroke-opacity: .4; stroke-width: 1.4; }
+.plate-grid .plate.best { fill: var(--gold); stroke: none; }
+.plate-grid text { font: 500 15px var(--display); fill: var(--ink); }
+.plate-grid text.plate-tag { font: 500 11px var(--mono); text-transform: uppercase; fill: var(--ink-2); text-anchor: middle; }
+
 .project-page .site-footer { margin-top: 64px; }
 
 @media (max-width: 700px) {
