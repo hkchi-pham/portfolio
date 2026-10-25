@@ -233,6 +233,8 @@ main { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
 .note:hover { transform: rotate(0deg) translateY(-6px) scale(1.03); z-index: 2; }
 .note .mono { font-size: 11px; color: var(--ink-2); }
 .note strong { font-family: var(--display); font-weight: 500; font-size: clamp(28px, 3vw, 38px); line-height: 1.1; color: var(--ink); letter-spacing: -0.02em; }
+/* longer words, e.g. "Languages", would overflow the note at full size */
+.note-long strong { font-size: clamp(22px, 2.2vw, 27px); }
 .note em { font-style: normal; font-size: 14px; line-height: 1.4; margin-top: auto; }
 
 .note.photo { padding: 10px 10px 12px; width: clamp(180px, 22vw, 250px); }
