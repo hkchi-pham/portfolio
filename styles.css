@@ -385,7 +385,14 @@ main { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
 .media-c { background: linear-gradient(140deg, var(--shell), var(--quicksand)); color: var(--royal); }
 .card-text { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
 .card-kicker { font-size: 11px; }
-.card-date { font-size: 12px; color: var(--gold); }
+/* project duration, shown as a gold pill on cards and project pages */
+.date-badge {
+  display: inline-flex; align-self: flex-start; align-items: center; gap: 8px;
+  padding: 6px 14px; border-radius: 100px;
+  font-size: 14px; font-weight: 500; color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+}
 .card-text h3 { font-size: 24px; line-height: 1.25; }
 .text-link { margin-top: auto; padding-top: 10px; font-weight: 500; color: var(--ink); text-decoration: none; }
 .text-link:hover { text-decoration: underline; text-decoration-color: var(--highlight); text-underline-offset: 4px; }

@@ -144,6 +144,7 @@
 .loop text.loop-sub { font: 500 10.5px var(--mono); text-transform: uppercase; fill: var(--ink-2); }
 .loop text.on-model { fill: var(--swan); }
 .paper-meta { margin-top: 10px; color: var(--ink-2); }
+.paper-head .date-badge, .app-id .date-badge { margin-top: 16px; }
 
 /* Result plots: kept on white plates, like printed figures */
 .plot { margin: 22px 0 0; }
