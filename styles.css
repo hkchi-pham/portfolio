@@ -319,7 +319,7 @@ main { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 60px); }
 
 /* ---------- Rows (timeline) ---------- */
-.sub-label { color: var(--ink); margin: 0 0 18px; font-weight: 500; }
+.sub-label { font: 600 clamp(28px, 3vw, 38px)/1.15 var(--display); letter-spacing: -0.02em; color: var(--gold); margin: 0 0 20px; }
 .rows { border-top: 1px solid var(--line); margin-bottom: 64px; }
 .rows:last-child { margin-bottom: 0; }
 .row {
