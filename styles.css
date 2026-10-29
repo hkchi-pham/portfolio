@@ -393,6 +393,10 @@ main { padding: 0 var(--gutter); max-width: 1320px; margin: 0 auto; }
   background: color-mix(in srgb, var(--gold) 14%, transparent);
   border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
 }
+/* weekly time commitment, under the duration pill or the row date */
+.time-spent { font-size: 13px; color: var(--ink-2); }
+.time-spent::before { content: "◷ "; color: var(--gold); }
+.row-date .time-spent { display: block; margin-top: 6px; padding-left: 2ch; text-indent: -2ch; }
 .card-text h3 { font-size: 24px; line-height: 1.25; }
 .text-link { margin-top: auto; padding-top: 10px; font-weight: 500; color: var(--ink); text-decoration: none; }
 .text-link:hover { text-decoration: underline; text-decoration-color: var(--highlight); text-underline-offset: 4px; }
